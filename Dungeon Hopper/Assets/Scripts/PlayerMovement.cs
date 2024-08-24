@@ -5,15 +5,21 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     private float horizontal;
-    [SerializeField] private float speed = 5f;  // Assign a value or expose it in the Inspector
+    [SerializeField] private float speed = 5f;
     private float jumpingPower = 21f;
-    private bool isfacingRight = true;
+    private bool isFacingRight = true;
 
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private Transform groundCheck;
     [SerializeField] private LayerMask groundLayer;
 
-    // Update is called once per frame
+    private void Start()
+    {
+        // Set collision detection to Continuous and interpolation to Interpolate
+        rb.collisionDetectionMode = CollisionDetectionMode2D.Continuous;
+        rb.interpolation = RigidbodyInterpolation2D.Interpolate;
+    }
+
     void Update()
     {
         horizontal = Input.GetAxisRaw("Horizontal");
@@ -43,9 +49,9 @@ public class PlayerMovement : MonoBehaviour
 
     private void Flip()
     {
-        if (isfacingRight && horizontal < 0 || !isfacingRight && horizontal > 0)
+        if (isFacingRight && horizontal < 0 || !isFacingRight && horizontal > 0)
         {
-            isfacingRight = !isfacingRight;
+            isFacingRight = !isFacingRight;
             Vector3 localScale = transform.localScale;
             localScale.x *= -1f;
             transform.localScale = localScale;
