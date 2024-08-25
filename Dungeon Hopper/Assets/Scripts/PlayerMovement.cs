@@ -57,4 +57,14 @@ public class PlayerMovement : MonoBehaviour
             transform.localScale = localScale;
         }
     }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("Lava"))
+        {
+            Debug.Log("Player has touched the lava!");
+
+            gameObject.SetActive(false);
+        }
+    }
 }
