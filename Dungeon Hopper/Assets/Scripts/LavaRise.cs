@@ -23,4 +23,10 @@ public class LavaRise : MonoBehaviour
             isRising = false;
         }
     }
+
+    public void StopRising()
+    {
+        // Method to stop the lava rising
+        isRising = false;
+    }
 }
