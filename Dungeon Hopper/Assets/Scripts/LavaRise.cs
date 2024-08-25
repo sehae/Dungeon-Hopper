@@ -1,15 +1,26 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class LavaRise : MonoBehaviour
 {
-    public float riseSpeed = 2f;  // Speed at which the lava rises
+    public float riseSpeed = 2f; // Speed at which the lava rises
 
-    // Update is called once per frame
-    void Update()
+    private bool isRising = true; // Flag to control lava rising
+
+    private void Update()
     {
-        // Move the lava upwards at the specified speed
-        transform.position += new Vector3(0, riseSpeed * Time.deltaTime, 0);
+        if (isRising)
+        {
+            // Move the lava upwards at the specified speed
+            transform.position += new Vector3(0, riseSpeed * Time.deltaTime, 0);
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Player"))
+        {
+            // Stop rising immediately upon contact
+            isRising = false;
+        }
     }
 }

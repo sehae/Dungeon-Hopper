@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
@@ -13,15 +12,22 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private Transform groundCheck;
     [SerializeField] private LayerMask groundLayer;
 
+    private bool isMovementEnabled = true;  // Flag to control movement
+
     private void Start()
     {
         // Set collision detection to Continuous and interpolation to Interpolate
         rb.collisionDetectionMode = CollisionDetectionMode2D.Continuous;
         rb.interpolation = RigidbodyInterpolation2D.Interpolate;
+
+        // Start the coroutine to disable movement
+        StartCoroutine(DisableMovementDuringCutscene(4.5f));  // Adjust the duration as needed
     }
 
     void Update()
     {
+        if (!isMovementEnabled) return;  // Skip movement if it's disabled
+
         horizontal = Input.GetAxisRaw("Horizontal");
 
         if (Input.GetButtonDown("Jump") && IsGrounded())
@@ -39,6 +45,8 @@ public class PlayerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (!isMovementEnabled) return;  // Skip movement if it's disabled
+
         rb.velocity = new Vector2(horizontal * speed, rb.velocity.y);
     }
 
@@ -63,8 +71,14 @@ public class PlayerMovement : MonoBehaviour
         if (collision.gameObject.CompareTag("Lava"))
         {
             Debug.Log("Player has touched the lava!");
-
             gameObject.SetActive(false);
         }
+    }
+
+    private IEnumerator DisableMovementDuringCutscene(float duration)
+    {
+        isMovementEnabled = false;  // Disable movement
+        yield return new WaitForSeconds(duration);  // Wait for the specified duration
+        isMovementEnabled = true;   // Re-enable movement
     }
 }
