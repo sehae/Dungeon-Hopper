@@ -7,7 +7,6 @@ public class animController : MonoBehaviour
     public Animator anim;
     public GameObject player;  // Reference to the player GameObject
     public GameObject finishMessage;  // Reference to the Finish Message GameObject
-    public LavaRise lavaRise;  // Reference to the LavaRise script
     private bool doorOpen = false;  // Track if the door is open
 
     void Start()
@@ -32,12 +31,6 @@ public class animController : MonoBehaviour
             player.SetActive(false);  // Make the player disappear
             Debug.Log("Player entered the door and disappeared.");
             finishMessage.SetActive(true);  // Show the Finish message
-
-            // Notify the LavaRise script to stop rising
-            if (lavaRise != null)
-            {
-                lavaRise.StopRising();
-            }
         }
     }
 }
