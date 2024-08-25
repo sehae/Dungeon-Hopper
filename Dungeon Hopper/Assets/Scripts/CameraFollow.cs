@@ -3,18 +3,31 @@ using UnityEngine;
 public class CameraFollow : MonoBehaviour
 {
     public Transform player;
-    public float smoothSpeed = 0.125f;  // Smooth movement speed
-    public Vector3 offset;  // Offset to keep the player centered
-    public float heightThreshold = 10f;  // The height at which the offset should start resetting
-    public float offsetResetSpeed = 0.05f;  // Speed at which the offset resets to 0
+    public float smoothSpeed = 0.125f;
+    public Vector3 offset;
+    public float heightThreshold = 10f;
+    public float offsetResetSpeed = 0.05f;
+
+    private Vector3 initialOffset;
+
+    void Start()
+    {
+        // Store the initial offset
+        initialOffset = offset;
+    }
 
     void LateUpdate()
     {
         // Check if the player has reached the height threshold
         if (player.position.y > heightThreshold)
         {
-            // Gradually reset the offset to 0 smoothly
-            offset.y = Mathf.Lerp(offset.y, 0, offsetResetSpeed);
+            // Gradually reset the offset to its initial value
+            offset.y = Mathf.Lerp(offset.y, initialOffset.y, offsetResetSpeed);
+        }
+        else
+        {
+            // Restore the initial offset if below the threshold
+            offset.y = Mathf.Lerp(offset.y, initialOffset.y, offsetResetSpeed);
         }
 
         // Target position for the camera
