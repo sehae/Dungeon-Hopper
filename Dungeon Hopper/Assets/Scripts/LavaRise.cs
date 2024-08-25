@@ -15,18 +15,18 @@ public class LavaRise : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.CompareTag("Player"))
-        {
-            // Stop rising immediately upon contact
-            isRising = false;
-        }
-    }
+    // private void OnTriggerEnter2D(Collider2D collision)
+    // {
+    //     if (collision.CompareTag("Player"))
+    //     {
+    //         // Stop rising immediately upon contact
+    //         isRising = false;
+    //     }
+    // }
 
-    public void StopRising()
-    {
-        // Method to stop the lava rising
-        isRising = false;
-    }
+    // public void StopRising()
+    // {
+    //     // Method to stop the lava rising
+    //     isRising = false;
+    // }
 }

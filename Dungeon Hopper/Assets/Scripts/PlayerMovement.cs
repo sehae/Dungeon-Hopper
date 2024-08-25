@@ -72,6 +72,8 @@ public class PlayerMovement : MonoBehaviour
         {
             Debug.Log("Player has touched the lava!");
             gameObject.SetActive(false);
+
+            FindObjectOfType<GameManager>().GameOver();
         }
     }
 

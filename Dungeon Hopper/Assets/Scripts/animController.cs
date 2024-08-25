@@ -33,11 +33,13 @@ public class animController : MonoBehaviour
             Debug.Log("Player entered the door and disappeared.");
             finishMessage.SetActive(true);  // Show the Finish message
 
-            // Notify the LavaRise script to stop rising
-            if (lavaRise != null)
-            {
-                lavaRise.StopRising();
-            }
+            // // Notify the LavaRise script to stop rising
+            // if (lavaRise != null)
+            // {
+            //     lavaRise.StopRising();
+            // }
+
+            FindObjectOfType<GameManager>().GameOver();
         }
     }
 }

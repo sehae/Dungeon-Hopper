@@ -18,13 +18,13 @@ public class ScoreCounter : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        scoreText.text = "Score: " + currentCoins.ToString();
+        scoreText.text = "SCORE: " + currentCoins.ToString();
     }
 
     public void IncreaseCoins(int v)
     {
         currentCoins += v;
-        scoreText.text = "Score: " + currentCoins.ToString();
+        scoreText.text = "SCORE: " + currentCoins.ToString();
     }
 
 }
